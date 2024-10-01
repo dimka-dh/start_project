@@ -1,6 +1,6 @@
-first = 42
-second = 69
-third = 42
+first = input('first: ')
+second = input('second: ')
+third = input('third: ')
 
 if first == second == third:
     print(3)
