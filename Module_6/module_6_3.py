@@ -29,6 +29,7 @@ class Pegasus(Horse, Eagle):
     def voice(self):
         print(self.sound)
 
+
 # print(Pegasus.mro())
 p1 = Pegasus()
 
