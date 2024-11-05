@@ -6,7 +6,7 @@ class Figure:
 
     def __init__(self, color, *sides):
         if len(sides) != self.sides_count:
-            self.__sides = [1] * self.sides_count
+            self.__sides = sides * self.sides_count
         else:
             self.__sides = list(sides)
 
@@ -27,7 +27,8 @@ class Figure:
             print(f"Нельзя установить цвет: ({r}, {g}, {b})")
 
     def __is_valid_color(self, r, g, b):
-        return isinstance(r, int) and isinstance(g, int) and isinstance(b, int) and 0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255
+        return isinstance(r, int) and isinstance(g, int) and isinstance(b,
+                                                                        int) and 0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255
 
     def get_sides(self):
         return self.__sides
