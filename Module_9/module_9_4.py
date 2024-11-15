@@ -7,7 +7,7 @@ print(result)
 # Задача 2: Замыкание
 def get_advanced_writer(file_name):
     def write_everything(*data_set):
-        with open(file_name, 'a') as file:
+        with open(file_name, 'a', encoding='utf-8') as file:
             for item in data_set:
                 file.write(str(item) + '\n')
     return write_everything
