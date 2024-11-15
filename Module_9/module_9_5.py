@@ -1,8 +1,7 @@
-# Класс исключения StepValueError
 class StepValueError(ValueError):
     pass
 
-# Класс итератора
+
 class Iterator:
     def __init__(self, start, stop, step=1):
         self.start = start
@@ -10,26 +9,22 @@ class Iterator:
         self.step = step
         self.pointer = start
 
-        # Проверка, что шаг не равен нулю
         if self.step == 0:
             raise StepValueError("Шаг не может быть равен 0")
 
     def __iter__(self):
-        # Сбрасываем указатель и возвращаем сам объект итератора
         self.pointer = self.start
         return self
 
     def __next__(self):
-        # Проверка условий завершения итерации
         if (self.step > 0 and self.pointer > self.stop) or (self.step < 0 and self.pointer < self.stop):
             raise StopIteration
 
-        # Возвращаем текущее значение pointer и увеличиваем его на step
         current_value = self.pointer
         self.pointer += self.step
         return current_value
 
-# Тестирование работы итератора
+
 try:
     iter1 = Iterator(100, 200, 0)
     for i in iter1:
@@ -42,7 +37,6 @@ iter3 = Iterator(6, 15, 2)
 iter4 = Iterator(5, 1, -1)
 iter5 = Iterator(10, 1)
 
-# Вывод результатов для каждого итератора
 for i in iter2:
     print(i, end=' ')
 print()

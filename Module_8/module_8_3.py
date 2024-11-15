@@ -1,27 +1,21 @@
-# Исключение IncorrectVinNumber
 class IncorrectVinNumber(Exception):
     def __init__(self, message):
         self.message = message
 
 
-# Исключение IncorrectCarNumbers
 class IncorrectCarNumbers(Exception):
     def __init__(self, message):
         self.message = message
 
 
-# Класс Car
 class Car:
     def __init__(self, model, vin, numbers):
         self.model = model
-        # Проверка vin при присваивании
         if self.__is_valid_vin(vin):
             self.__vin = vin
-        # Проверка номера при присваивании
         if self.__is_valid_numbers(numbers):
             self.__numbers = numbers
 
-    # Приватный метод для проверки корректности vin
     def __is_valid_vin(self, vin_number):
         if not isinstance(vin_number, int):
             raise IncorrectVinNumber('Некорректный тип vin номер')
@@ -29,7 +23,6 @@ class Car:
             raise IncorrectVinNumber('Неверный диапазон для vin номера')
         return True
 
-    # Приватный метод для проверки корректности номера
     def __is_valid_numbers(self, numbers):
         if not isinstance(numbers, str):
             raise IncorrectCarNumbers('Некорректный тип данных для номеров')
@@ -38,7 +31,6 @@ class Car:
         return True
 
 
-# Пример выполнения программы:
 try:
     first = Car('Model1', 1000000, 'f123dj')
 except IncorrectVinNumber as exc:
