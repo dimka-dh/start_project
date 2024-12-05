@@ -13,6 +13,17 @@ def initiate_db():
         )
     """)
     connection.commit()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS Users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL,
+            age INTEGER NOT NULL,
+            balance INTEGER NOT NULL
+        )
+    """)
+    connection.commit()
     connection.close()
 
 
@@ -38,6 +49,34 @@ def add_products():
     cursor.executemany("INSERT INTO Products (title, description, price) VALUES (?, ?, ?)", products)
     connection.commit()
     connection.close()
+
+
+def add_user(username, email, age):
+    connection = sqlite3.connect("not_telegram.db")
+    cursor = connection.cursor()
+    cursor.execute("""
+        INSERT INTO Users (username, email, age, balance) VALUES (?, ?, ?, 1000)
+    """, (username, email, age))
+    connection.commit()
+    connection.close()
+
+
+def is_included(username):
+    connection = sqlite3.connect("not_telegram.db")
+    cursor = connection.cursor()
+    cursor.execute("SELECT id FROM Users WHERE username = ?", (username,))
+    result = cursor.fetchone()
+    connection.close()
+    return result is not None
+
+
+def get_all_users():
+    connection = sqlite3.connect("not_telegram.db")
+    cursor = connection.cursor()
+    cursor.execute("SELECT id, username, email, age, balance FROM Users")
+    users = cursor.fetchall()
+    connection.close()
+    return users
 
 
 if __name__ == "__main__":
